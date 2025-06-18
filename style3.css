@@ -1,13 +1,16 @@
-/* Fondo de pantalla */
+/* --- Fondo general --- */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'Segoe UI', sans-serif;
   position: relative;
 }
 
+/* Imagen de fondo */
 .bg-img {
   position: fixed;
   top: 0;
@@ -16,18 +19,21 @@ html, body {
   width: 100%;
   object-fit: cover;
   z-index: -1;
+  pointer-events: none;
 }
 
-/* Caja de preguntas */
+/* --- Caja de preguntas --- */
 .question-box {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 16px;
   max-width: 600px;
   padding: 30px;
+  margin: auto;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  color: #0f172a;
 }
 
-/* Botones de opción */
+/* --- Botones de opción --- */
 .btn-option {
   display: block;
   margin: 10px auto;
@@ -38,6 +44,8 @@ html, body {
   border-radius: 12px;
   font-weight: bold;
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 400px;
 }
 
 .btn-option:hover {
@@ -47,6 +55,7 @@ html, body {
   transform: scale(1.05);
 }
 
+/* Estados correctos/incorrectos */
 .btn-option.correct {
   background-color: #22c55e;
   border-color: #16a34a;
@@ -59,14 +68,34 @@ html, body {
   color: #fff;
 }
 
-/* Feedback */
+/* --- Feedback del resultado --- */
 #feedback {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
   color: #0f172a;
 }
 
+/* --- Imagen del resultado final --- */
 .score-image {
   max-width: 200px;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Responsive para móviles --- */
+@media (max-width: 768px) {
+  .question-box {
+    padding: 20px 16px;
+    max-width: 90%;
+  }
+
+  .btn-option {
+    font-size: 1rem;
+  }
+
+  .score-image {
+    max-width: 150px;
+  }
 }
