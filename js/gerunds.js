@@ -153,10 +153,10 @@ function showResults() {
     imagePath = "./img/cheems.jpg";
   } else if (correctAnswers <= 7) {
     message = "😊 Good job! You're getting the hang of it!";
-    imagePath = "./img/cheems4.png";
+    imagePath = "./img/cheems4.jpg";
   } else {
     message = "🏆 Excellent! You're a grammar pro!";
-    imagePath = "./img/cheems2.png";
+    imagePath = "./img/cheems2.jpg";
   }
 
   container.innerHTML = `

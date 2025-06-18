@@ -1,50 +1,45 @@
+/* Fondo animado */
 body {
   background-image: url('./img/ce6a8893b318e986e2e328b19e2e9aa2.gif');
-  background-size: cover;         /* Ajusta la imagen para cubrir toda la pantalla */
-  background-position: center;    /* Centra la imagen */
-  background-repeat: no-repeat;   /* Evita que se repita */
-  min-height: 100vh;              /* Asegura que cubra toda la altura de la pantalla */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-h1{
-    color: #fff;
+/* Capa oscura para legibilidad */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-h2{
-    color: #fff;
+/* Títulos y texto */
+h1, h2, p {
+  color: #ffffff;
 }
 
-p{
-    color: #fff;
+hr {
+  border-color: #ffffff;
+  opacity: 0.3;
 }
 
-/* Estilo base para todos los botones */
+/* Botones Cyber */
 .btn-cyber {
   color: #000;
-  border: none;
-  border-radius: none;
   font-weight: bold;
+  border-radius: 10px;
+  border: none;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
-  outline: none;
-}
-
-/* Cyan brillante */
-.btn-cyber-cyan {
-  background-color: #00ffff;
-}
-.btn-cyber-cyan:hover {
-  background-color: #66ffff;
-  box-shadow: 0 0 20px #00ffff;
-}
-
-/* Amarillo neón */
-.btn-cyber-yellow {
-  background-color: #ffe600;
-}
-.btn-cyber-yellow:hover {
-  background-color: #fff44d;
-  box-shadow: 0 0 20px #ffe600;
 }
 
 /* Verde lima */
@@ -56,19 +51,34 @@ p{
   box-shadow: 0 0 20px #39ff14;
 }
 
-/* Gris claro */
-.btn-cyber-light {
-  background-color: #f1f1f1;
+/* Cian brillante */
+.btn-cyber-cyan {
+  background-color: #00ffff;
 }
-.btn-cyber-light:hover {
-  background-color: #ffffff;
-  box-shadow: 0 0 20px #f1f1f1;
+.btn-cyber-cyan:hover {
+  background-color: #66ffff;
+  box-shadow: 0 0 20px #00ffff;
 }
 
+/* Accesibilidad y experiencia */
 .btn:focus,
 .btn:active,
 button:focus,
 button:active {
   outline: none !important;
   box-shadow: none !important;
+}
+
+/* Responsive: textos más pequeños en móviles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  .btn {
+    font-size: 1rem;
+    padding: 12px;
+  }
 }
