@@ -1,14 +1,37 @@
-/* Fondo de pantalla */
+/* Estilo general del fondo animado */
 html, body {
-background-image: url('./img/bongo-cat-meme-gif-desktop-wallpaper-preview.gif');
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  position: relative;
+  overflow-x: hidden;
+  background: url('./img/bongo-cat-meme-gif-desktop-wallpaper-preview.gif') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* Capa oscura para mejorar contraste del texto */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+}
+
+/* Caja de preguntas */
+.question-box {
+  background-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 700px;
+  width: 90%;
+  color: white;
+}
+
+/* Botones personalizados */
 .btn-option {
   display: block;
   margin: 12px auto;
@@ -17,7 +40,7 @@ background-image: url('./img/bongo-cat-meme-gif-desktop-wallpaper-preview.gif');
   border-radius: 12px;
   font-weight: bold;
   font-size: 1.1rem;
-  background: linear-gradient(145deg, #3b82f6, #1e40af); /* Azul con profundidad */
+  background: linear-gradient(145deg, #3b82f6, #1e40af);
   color: #fff;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
   transition: all 0.2s ease-in-out;
@@ -25,8 +48,7 @@ background-image: url('./img/bongo-cat-meme-gif-desktop-wallpaper-preview.gif');
 
 .btn-option:hover {
   transform: scale(1.05);
-  background: linear-gradient(145deg, #60a5fa, #1d4ed8); /* Azul más claro */
-  color: #fff;
+  background: linear-gradient(145deg, #60a5fa, #1d4ed8);
 }
 
 .btn-option:active {
@@ -34,15 +56,12 @@ background-image: url('./img/bongo-cat-meme-gif-desktop-wallpaper-preview.gif');
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Estados correctos e incorrectos */
 .btn-option.correct {
   background: linear-gradient(145deg, #22c55e, #15803d);
-  color: #fff;
 }
 
 .btn-option.incorrect {
   background: linear-gradient(145deg, #ef4444, #b91c1c);
-  color: #fff;
 }
 
 .score-image {
@@ -50,4 +69,20 @@ background-image: url('./img/bongo-cat-meme-gif-desktop-wallpaper-preview.gif');
   height: auto;
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .question-box {
+    padding: 20px 15px;
+  }
+
+  .btn-option {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .score-image {
+    max-width: 160px;
+  }
 }
