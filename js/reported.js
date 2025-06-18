@@ -131,7 +131,7 @@ function next() {
     if (current < shuffled.length) {
       showQuestion();
     } else {
-      container.innerHTML = "<p>🎉 You've completed all questions!</p>";
+      container.innerHTML = "<p>🎉 You've completed all questions!</p> ";
     }
   }, 1500);
 }
