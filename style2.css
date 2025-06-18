@@ -1,0 +1,53 @@
+/* Fondo de pantalla */
+html, body {
+background-image: url('./img/bongo-cat-meme-gif-desktop-wallpaper-preview.gif');
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-option {
+  display: block;
+  margin: 12px auto;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: linear-gradient(145deg, #3b82f6, #1e40af); /* Azul con profundidad */
+  color: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-option:hover {
+  transform: scale(1.05);
+  background: linear-gradient(145deg, #60a5fa, #1d4ed8); /* Azul más claro */
+  color: #fff;
+}
+
+.btn-option:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estados correctos e incorrectos */
+.btn-option.correct {
+  background: linear-gradient(145deg, #22c55e, #15803d);
+  color: #fff;
+}
+
+.btn-option.incorrect {
+  background: linear-gradient(145deg, #ef4444, #b91c1c);
+  color: #fff;
+}
+
+.score-image {
+  max-width: 200px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}

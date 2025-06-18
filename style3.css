@@ -1,0 +1,72 @@
+/* Fondo de pantalla */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.bg-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Caja de preguntas */
+.question-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  max-width: 600px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Botones de opción */
+.btn-option {
+  display: block;
+  margin: 10px auto;
+  padding: 12px 24px;
+  border: 2px solid #4f46e5;
+  background-color: #1e293b;
+  color: #ffffff;
+  border-radius: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-option:hover {
+  background-color: #7dd3fc;
+  color: #1e293b;
+  border-color: #7dd3fc;
+  transform: scale(1.05);
+}
+
+.btn-option.correct {
+  background-color: #22c55e;
+  border-color: #16a34a;
+  color: #fff;
+}
+
+.btn-option.incorrect {
+  background-color: #ef4444;
+  border-color: #b91c1c;
+  color: #fff;
+}
+
+/* Feedback */
+#feedback {
+  color: #0f172a;
+}
+
+.score-image {
+  max-width: 200px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+}

@@ -59,61 +59,118 @@ const allQuestions = [
   }
 ];
 
-// Selección aleatoria de 10 preguntas
+// Mezclar preguntas y tomar 10
 const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, 10);
 
 let current = 0;
+let correctAnswers = 0;
+
 const container = document.getElementById("question-container");
 const feedback = document.getElementById("feedback");
 
 function showQuestion() {
   const q = shuffled[current];
 
+  let content = `<p><strong>${q.question}</strong></p>`;
+
   if (q.type === "multiple") {
-    container.innerHTML = `
-      <p><strong>${q.question}</strong></p>
-      ${q.options.map(opt => `<button class="btn btn-outline-primary my-2" onclick="checkAnswer('${opt}')">${opt}</button>`).join("<br>")}
-    `;
+    content += q.options
+      .map(opt => `<button class="btn btn-option" onclick="checkAnswer(this, '${opt}')">${opt}</button>`)
+      .join("<br>");
   } else if (q.type === "input") {
-    container.innerHTML = `
-      <p><strong>${q.question}</strong></p>
+    content += `
       <input type="text" id="user-input" class="form-control w-50 mx-auto my-2" placeholder="Type your answer" />
-      <button class="btn btn-success" onclick="checkInputAnswer()">Submit</button>
+      <button class="btn btn-success mt-2" onclick="checkInputAnswer()">Submit</button>
     `;
   }
+
+  container.innerHTML = content;
+  feedback.textContent = "";
 }
 
-function checkAnswer(selected) {
+function checkAnswer(button, selected) {
   const correct = shuffled[current].answer;
+
+  const buttons = document.querySelectorAll(".btn-option");
+  buttons.forEach(btn => btn.disabled = true);
+
   if (selected === correct) {
-    feedback.textContent = "✅ Correct!";
+    correctAnswers++;
+    feedback.innerHTML = "✅ Correct!";
+    button.classList.add("correct");
   } else {
-    feedback.textContent = `❌ Wrong. Correct answer: ${correct}`;
+    feedback.innerHTML = `❌ Wrong. Correct answer: <strong>${correct}</strong>`;
+    button.classList.add("incorrect");
+    buttons.forEach(btn => {
+      if (btn.textContent === correct) btn.classList.add("correct");
+    });
   }
-  next();
+
+  showNextButton();
 }
 
 function checkInputAnswer() {
   const userInput = document.getElementById("user-input").value.trim().toLowerCase();
   const correct = shuffled[current].answer.toLowerCase();
+
   if (userInput === correct) {
-    feedback.textContent = "✅ Correct!";
+    correctAnswers++;
+    feedback.innerHTML = "✅ Correct!";
   } else {
-    feedback.textContent = `❌ Wrong. Correct answer: ${shuffled[current].answer}`;
+    feedback.innerHTML = `❌ Wrong. Correct answer: <strong>${shuffled[current].answer}</strong>`;
   }
-  next();
+
+  showNextButton();
+}
+
+function showNextButton() {
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Next Question ▶";
+  nextBtn.className = "btn btn-primary mt-3";
+  nextBtn.onclick = next;
+  feedback.appendChild(document.createElement("br"));
+  feedback.appendChild(nextBtn);
 }
 
 function next() {
-  setTimeout(() => {
-    feedback.textContent = "";
-    current++;
-    if (current < shuffled.length) {
-      showQuestion();
-    } else {
-      container.innerHTML = "<p>🎉 You've completed all questions!</p>";
-    }
-  }, 1500);
+  current++;
+  if (current < shuffled.length) {
+    showQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  let message = "";
+  let imagePath = "";
+
+  if (correctAnswers <= 3) {
+    message = "😢 Keep practicing! You’re just getting started.";
+    imagePath = "./img/cheems3.jpg";
+  } else if (correctAnswers <= 5) {
+    message = "🙂 Not bad! A bit more practice and you'll master it!";
+    imagePath = "./img/cheems.jpg";
+  } else if (correctAnswers <= 7) {
+    message = "😊 Good job! You're getting the hang of it!";
+    imagePath = "./img/cheems4.png";
+  } else {
+    message = "🏆 Excellent! You're a grammar pro!";
+    imagePath = "./img/cheems2.png";
+  }
+
+  container.innerHTML = `
+    <h3>🎉 You've completed all questions!</h3>
+    <p class="fs-5">✅ You got <strong>${correctAnswers}</strong> out of <strong>${shuffled.length}</strong> correct.</p>
+    <p class="mt-3 fs-5">${message}</p>
+    <img src="${imagePath}" alt="Score image" class="score-image mt-3 mb-4"/>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <button class="btn btn-secondary" onclick="location.href='index.html'">🏠 Back to Menu</button>
+      <button class="btn btn-primary" onclick="location.reload()">🔁 Try Again</button>
+    </div>
+  `;
+  feedback.textContent = "";
 }
 
 showQuestion();
