@@ -1,0 +1,74 @@
+body {
+  background-image: url('./img/ce6a8893b318e986e2e328b19e2e9aa2.gif');
+  background-size: cover;         /* Ajusta la imagen para cubrir toda la pantalla */
+  background-position: center;    /* Centra la imagen */
+  background-repeat: no-repeat;   /* Evita que se repita */
+  min-height: 100vh;              /* Asegura que cubra toda la altura de la pantalla */
+}
+
+h1{
+    color: #fff;
+}
+
+h2{
+    color: #fff;
+}
+
+p{
+    color: #fff;
+}
+
+/* Estilo base para todos los botones */
+.btn-cyber {
+  color: #000;
+  border: none;
+  border-radius: none;
+  font-weight: bold;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+/* Cyan brillante */
+.btn-cyber-cyan {
+  background-color: #00ffff;
+}
+.btn-cyber-cyan:hover {
+  background-color: #66ffff;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+/* Amarillo neón */
+.btn-cyber-yellow {
+  background-color: #ffe600;
+}
+.btn-cyber-yellow:hover {
+  background-color: #fff44d;
+  box-shadow: 0 0 20px #ffe600;
+}
+
+/* Verde lima */
+.btn-cyber-lime {
+  background-color: #39ff14;
+}
+.btn-cyber-lime:hover {
+  background-color: #74ff68;
+  box-shadow: 0 0 20px #39ff14;
+}
+
+/* Gris claro */
+.btn-cyber-light {
+  background-color: #f1f1f1;
+}
+.btn-cyber-light:hover {
+  background-color: #ffffff;
+  box-shadow: 0 0 20px #f1f1f1;
+}
+
+.btn:focus,
+.btn:active,
+button:focus,
+button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
