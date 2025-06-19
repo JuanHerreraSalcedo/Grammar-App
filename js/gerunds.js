@@ -2,64 +2,63 @@ const allQuestions = [
   // Multiple Choice
   {
     type: "multiple",
-    question: "She enjoys ____ (read) novels.",
-    options: ["to read", "reading", "read"],
-    answer: "reading"
+    question: "She ____ never visited Paris.",
+    options: ["has", "have", "had"],
+    answer: "has"
   },
   {
     type: "multiple",
-    question: "He decided ____ (move) to Canada.",
-    options: ["moving", "to move", "move"],
-    answer: "to move"
+    question: "We ____ finished our homework.",
+    options: ["has", "have", "had"],
+    answer: "have"
   },
   {
     type: "multiple",
-    question: "We agreed ____ (meet) at 5 PM.",
-    options: ["to meet", "meeting", "meet"],
-    answer: "to meet"
+    question: "They ____ lived here for ten years.",
+    options: ["has", "have", "had"],
+    answer: "have"
   },
   {
     type: "multiple",
-    question: "They avoided ____ (talk) about the problem.",
-    options: ["to talk", "talking", "talk"],
-    answer: "talking"
+    question: "He ____ just eaten lunch.",
+    options: ["have", "has", "is"],
+    answer: "has"
   },
   {
     type: "multiple",
-    question: "I hope ____ (see) you again soon.",
-    options: ["seeing", "to see", "see"],
-    answer: "to see"
+    question: "I ____ already seen that movie.",
+    options: ["have", "has", "had"],
+    answer: "have"
   },
 
-  // Input type
+  // Input
   {
     type: "input",
-    question: "Complete: I can’t stand ____ (wait) in line.",
-    answer: "waiting"
+    question: "Complete: She ____ (work) here since 2020.",
+    answer: "has worked"
   },
   {
     type: "input",
-    question: "Complete: She refused ____ (help) him.",
-    answer: "to help"
+    question: "Complete: We ____ (not finish) our project yet.",
+    answer: "have not finished"
   },
   {
     type: "input",
-    question: "Complete: He suggested ____ (go) to the park.",
-    answer: "going"
+    question: "Complete: He ____ (visit) London three times.",
+    answer: "has visited"
   },
   {
     type: "input",
-    question: "Complete: We promised ____ (call) her.",
-    answer: "to call"
+    question: "Complete: I ____ (never / be) to Japan.",
+    answer: "have never been"
   },
   {
     type: "input",
-    question: "Complete: They enjoy ____ (travel) abroad.",
-    answer: "traveling"
+    question: "Complete: They ____ (just / arrive) at the airport.",
+    answer: "have just arrived"
   }
 ];
 
-// Mezclar preguntas y tomar 10
 const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, 10);
 
 let current = 0;
@@ -90,8 +89,8 @@ function showQuestion() {
 
 function checkAnswer(button, selected) {
   const correct = shuffled[current].answer;
-
   const buttons = document.querySelectorAll(".btn-option");
+
   buttons.forEach(btn => btn.disabled = true);
 
   if (selected === correct) {

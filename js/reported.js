@@ -1,144 +1,83 @@
-// Preguntas variadas con "that" y nuevas estructuras
 const allQuestions = [
-  // Reported Statements
   {
-    type: "multiple",
-    question: "She said: 'I love chocolate.'",
-    options: [
-      "She said that she loved chocolate.",
-      "She said that she loves chocolate.",
-      "She said she has loved chocolate."
-    ],
-    answer: "She said that she loved chocolate."
+    sentence: "She ____ never ____ sushi.",
+    answer: ["has", "eaten"]
   },
   {
-    type: "multiple",
-    question: "John said: 'I am working late tonight.'",
-    options: [
-      "John said that he was working late that night.",
-      "John said that he is working late tonight.",
-      "John said that he will work late."
-    ],
-    answer: "John said that he was working late that night."
+    sentence: "They ____ just ____ the game.",
+    answer: ["have", "won"]
   },
   {
-    type: "multiple",
-    question: "They said: 'We have finished our homework.'",
-    options: [
-      "They said that they had finished their homework.",
-      "They said that they finished their homework.",
-      "They said that they have finished their homework."
-    ],
-    answer: "They said that they had finished their homework."
+    sentence: "I ____ already ____ that movie.",
+    answer: ["have", "seen"]
   },
   {
-    type: "multiple",
-    question: "Emma said: 'I can cook well.'",
-    options: [
-      "Emma said that she could cook well.",
-      "Emma said that she can cook well.",
-      "Emma said that she was able to cook."
-    ],
-    answer: "Emma said that she could cook well."
+    sentence: "He ____ never ____ his homework on time.",
+    answer: ["has", "finished"]
   },
   {
-    type: "multiple",
-    question: "He said: 'I will travel to Japan.'",
-    options: [
-      "He said that he would travel to Japan.",
-      "He said that he travels to Japan.",
-      "He said that he will travel to Japan."
-    ],
-    answer: "He said that he would travel to Japan."
-  },
-
-  // Input Questions
-  {
-    type: "input",
-    question: "Complete: She said: 'I am happy.' → She said that she ____ happy.",
-    answer: "was"
-  },
-  {
-    type: "input",
-    question: "Complete: They said: 'We have been waiting.' → They said that they ____ been waiting.",
-    answer: "had"
-  },
-  {
-    type: "input",
-    question: "Complete: He said: 'I saw her yesterday.' → He said that he ____ her the day before.",
-    answer: "had seen"
-  },
-  {
-    type: "input",
-    question: "Complete: She said: 'I will call you.' → She said that she ____ call me.",
-    answer: "would"
-  },
-  {
-    type: "input",
-    question: "Complete: I said: 'I can finish it.' → I said that I ____ finish it.",
-    answer: "could"
+    sentence: "We ____ ____ to Paris twice.",
+    answer: ["have", "been"]
   }
 ];
-
-// Mezclar preguntas
-const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, 10);
-
-let current = 0;
-let correctAnswers = 0;
 
 const container = document.getElementById("question-container");
 const feedback = document.getElementById("feedback");
 
+let current = 0;
+let correctAnswers = 0;
+
 function showQuestion() {
-  const q = shuffled[current];
+  const q = allQuestions[current];
 
-  let content = `<p><strong>${q.question}</strong></p>`;
+  const dragOptions = shuffle([
+    ...q.answer,
+    ...getRandomDistractors(q.answer)
+  ]);
 
-  if (q.type === "multiple") {
-    content += q.options
-      .map(opt => `<button class="btn btn-option" onclick="checkAnswer(this, '${opt}')">${opt}</button>`)
-      .join("<br>");
-  } else if (q.type === "input") {
-    content += `
-      <input type="text" id="user-input" class="form-control w-50 mx-auto my-2" placeholder="Type your answer" />
-      <button class="btn btn-success mt-2" onclick="checkInputAnswer()">Submit</button>
-    `;
-  }
-
-  container.innerHTML = content;
+  container.innerHTML = `
+    <p class="mb-4"><strong>Complete the sentence:</strong></p>
+    <h4>${q.sentence.replace(/____/g, '<span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></span>')}</h4>
+    <div class="mt-4">
+      ${dragOptions.map(word => `<span class="drag-word" draggable="true" ondragstart="drag(event)" id="${word}">${word}</span>`).join(" ")}
+    </div>
+    <button class="btn btn-success mt-4" onclick="checkDragAnswer()">Submit</button>
+  `;
   feedback.textContent = "";
 }
 
-function checkAnswer(button, selected) {
-  const correct = shuffled[current].answer;
-  const buttons = document.querySelectorAll(".btn-option");
-
-  buttons.forEach(btn => btn.disabled = true);
-
-  if (selected === correct) {
-    correctAnswers++;
-    feedback.innerHTML = "✅ Correct!";
-    button.classList.add("correct");
-  } else {
-    feedback.innerHTML = `❌ Wrong. Correct answer: <strong>${correct}</strong>`;
-    button.classList.add("incorrect");
-    buttons.forEach(btn => {
-      if (btn.textContent === correct) btn.classList.add("correct");
-    });
-  }
-
-  showNextButton();
+function getRandomDistractors(correctWords) {
+  const pool = ["have", "has", "eaten", "gone", "been", "played", "won", "seen", "driven", "taken"];
+  return shuffle(pool.filter(w => !correctWords.includes(w))).slice(0, 4);
 }
 
-function checkInputAnswer() {
-  const userInput = document.getElementById("user-input").value.trim().toLowerCase();
-  const correct = shuffled[current].answer.toLowerCase();
+function allowDrop(ev) {
+  ev.preventDefault();
+}
 
-  if (userInput === correct) {
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData("text");
+  ev.target.textContent = data;
+  ev.target.classList.add("filled");
+}
+
+function checkDragAnswer() {
+  const drops = document.querySelectorAll(".drop-zone");
+  const userAnswers = Array.from(drops).map(drop => drop.textContent.trim().toLowerCase());
+  const correct = allQuestions[current].answer.map(a => a.toLowerCase());
+
+  let isCorrect = JSON.stringify(userAnswers) === JSON.stringify(correct);
+
+  if (isCorrect) {
     correctAnswers++;
     feedback.innerHTML = "✅ Correct!";
   } else {
-    feedback.innerHTML = `❌ Wrong. Correct answer: <strong>${shuffled[current].answer}</strong>`;
+    feedback.innerHTML = `❌ Wrong. Correct answer: <strong>${correct.join(" ")}</strong>`;
   }
 
   showNextButton();
@@ -155,7 +94,7 @@ function showNextButton() {
 
 function next() {
   current++;
-  if (current < shuffled.length) {
+  if (current < allQuestions.length) {
     showQuestion();
   } else {
     showResults();
@@ -166,31 +105,35 @@ function showResults() {
   let message = "";
   let imagePath = "";
 
-  if (correctAnswers <= 3) {
-    message = "😢 Keep practicing! You’re just getting started.";
+  if (correctAnswers <= 2) {
+    message = "😢 Keep practicing!";
     imagePath = "./img/cheems3.jpg";
-  } else if (correctAnswers <= 5) {
-    message = "🙂 Not bad! A bit more practice and you'll master it!";
+  } else if (correctAnswers === 3) {
+    message = "🙂 You're getting better!";
     imagePath = "./img/cheems.jpg";
-  } else if (correctAnswers <= 7) {
-    message = "😊 Good job! You're getting the hang of it!";
+  } else if (correctAnswers === 4) {
+    message = "😊 Well done!";
     imagePath = "./img/cheems4.jpg";
   } else {
-    message = "🏆 Excellent! You're a grammar pro!";
+    message = "🏆 Excellent work!";
     imagePath = "./img/cheems2.jpg";
   }
+
   container.innerHTML = `
     <h3>🎉 You've completed all questions!</h3>
-    <p class="fs-5">✅ You got <strong>${correctAnswers}</strong> out of <strong>${shuffled.length}</strong> correct.</p>
+    <p class="fs-5">✅ You got <strong>${correctAnswers}</strong> out of <strong>${allQuestions.length}</strong> correct.</p>
     <p class="mt-3 fs-5">${message}</p>
     <img src="${imagePath}" alt="Score image" class="score-image mt-3 mb-4"/>
-
     <div class="d-flex justify-content-center gap-3 mt-4">
       <button class="btn btn-secondary" onclick="location.href='index.html'">🏠 Back to Menu</button>
       <button class="btn btn-primary" onclick="location.reload()">🔁 Try Again</button>
     </div>
   `;
   feedback.textContent = "";
+}
+
+function shuffle(array) {
+  return array.sort(() => Math.random() - 0.5);
 }
 
 showQuestion();

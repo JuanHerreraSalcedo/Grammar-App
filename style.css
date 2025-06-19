@@ -44,11 +44,11 @@ hr {
 
 /* Verde lima */
 .btn-cyber-lime {
-  background-color: #39ff14;
+  background-color: #b000ff;
 }
 .btn-cyber-lime:hover {
-  background-color: #74ff68;
-  box-shadow: 0 0 20px #39ff14;
+  background-color: #fd00ff;
+  box-shadow: 0 0 20px #b000ff;
 }
 
 /* Cian brillante */
