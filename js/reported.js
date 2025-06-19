@@ -38,8 +38,8 @@ function showQuestion() {
   container.innerHTML = `
     <p class="mb-4"><strong>Complete the sentence:</strong></p>
     <h4>${q.sentence.replace(/____/g, '<span class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></span>')}</h4>
-    <div class="mt-4">
-      ${dragOptions.map(word => `<span class="drag-word" draggable="true" ondragstart="drag(event)" id="${word}">${word}</span>`).join(" ")}
+    <div class="mt-4 d-flex flex-wrap justify-content-center">
+      ${dragOptions.map(word => `<span class="drag-word" draggable="true" ondragstart="drag(event)" id="drag-${word}-${Math.random()}">${word}</span>`).join(" ")}
     </div>
     <button class="btn btn-success mt-4" onclick="checkDragAnswer()">Submit</button>
   `;
@@ -47,7 +47,10 @@ function showQuestion() {
 }
 
 function getRandomDistractors(correctWords) {
-  const pool = ["have", "has", "eaten", "gone", "been", "played", "won", "seen", "driven", "taken"];
+  const pool = [
+    "have", "has", "eaten", "gone", "been", "played",
+    "won", "seen", "driven", "taken", "made", "read", "done"
+  ];
   return shuffle(pool.filter(w => !correctWords.includes(w))).slice(0, 4);
 }
 
@@ -56,7 +59,7 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
+  ev.dataTransfer.setData("text", ev.target.textContent);
 }
 
 function drop(ev) {

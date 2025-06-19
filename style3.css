@@ -8,6 +8,7 @@ html, body {
   overflow-y: auto;
   font-family: 'Segoe UI', sans-serif;
   position: relative;
+  touch-action: manipulation; /* Mejora la experiencia táctil */
 }
 
 /* Imagen de fondo */
@@ -95,6 +96,7 @@ html, body {
   font-weight: bold;
   user-select: none;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  touch-action: none; /* 👈 Esto ayuda en móviles */
 }
 
 .drag-word:active {
@@ -137,8 +139,8 @@ html, body {
   }
 
   .drag-word {
-    padding: 8px 10px;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    padding: 8px 12px;
   }
 
   .drop-zone {
