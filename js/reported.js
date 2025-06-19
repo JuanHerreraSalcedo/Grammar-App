@@ -1,61 +1,82 @@
+// Preguntas variadas con "that" y nuevas estructuras
 const allQuestions = [
-  // 5 Multiple Choice
+  // Reported Statements
   {
     type: "multiple",
-    question: "He said: 'I am tired.'",
-    options: ["He said he was tired.", "He said he is tired.", "He said he had been tired."],
-    answer: "He said he was tired."
+    question: "She said: 'I love chocolate.'",
+    options: [
+      "She said that she loved chocolate.",
+      "She said that she loves chocolate.",
+      "She said she has loved chocolate."
+    ],
+    answer: "She said that she loved chocolate."
   },
   {
     type: "multiple",
-    question: "She said: 'I will help you tomorrow.'",
-    options: ["She said she would help me tomorrow.", "She said she helps me.", "She said she would help me the next day."],
-    answer: "She said she would help me the next day."
+    question: "John said: 'I am working late tonight.'",
+    options: [
+      "John said that he was working late that night.",
+      "John said that he is working late tonight.",
+      "John said that he will work late."
+    ],
+    answer: "John said that he was working late that night."
   },
   {
     type: "multiple",
-    question: "They said: 'We are leaving now.'",
-    options: ["They said they are leaving now.", "They said they were leaving then.", "They said they left now."],
-    answer: "They said they were leaving then."
+    question: "They said: 'We have finished our homework.'",
+    options: [
+      "They said that they had finished their homework.",
+      "They said that they finished their homework.",
+      "They said that they have finished their homework."
+    ],
+    answer: "They said that they had finished their homework."
   },
   {
     type: "multiple",
-    question: "She said: 'I can drive.'",
-    options: ["She said she could drive.", "She said she can drive.", "She said she will drive."],
-    answer: "She said she could drive."
+    question: "Emma said: 'I can cook well.'",
+    options: [
+      "Emma said that she could cook well.",
+      "Emma said that she can cook well.",
+      "Emma said that she was able to cook."
+    ],
+    answer: "Emma said that she could cook well."
   },
   {
     type: "multiple",
-    question: "He said: 'I have finished my homework.'",
-    options: ["He said he finished his homework.", "He said he had finished his homework.", "He said he has finished his homework."],
-    answer: "He said he had finished his homework."
+    question: "He said: 'I will travel to Japan.'",
+    options: [
+      "He said that he would travel to Japan.",
+      "He said that he travels to Japan.",
+      "He said that he will travel to Japan."
+    ],
+    answer: "He said that he would travel to Japan."
   },
 
-  // 5 Input
+  // Input Questions
   {
     type: "input",
-    question: "Complete: She said: 'I am studying.' → She said she ____ studying.",
+    question: "Complete: She said: 'I am happy.' → She said that she ____ happy.",
     answer: "was"
   },
   {
     type: "input",
-    question: "Complete: He said: 'I have been working.' → He said he ____ been working.",
+    question: "Complete: They said: 'We have been waiting.' → They said that they ____ been waiting.",
     answer: "had"
   },
   {
     type: "input",
-    question: "Complete: They said: 'We will come.' → They said they ____ come.",
+    question: "Complete: He said: 'I saw her yesterday.' → He said that he ____ her the day before.",
+    answer: "had seen"
+  },
+  {
+    type: "input",
+    question: "Complete: She said: 'I will call you.' → She said that she ____ call me.",
     answer: "would"
   },
   {
     type: "input",
-    question: "Complete: I said: 'I can do it.' → I said I ____ do it.",
+    question: "Complete: I said: 'I can finish it.' → I said that I ____ finish it.",
     answer: "could"
-  },
-  {
-    type: "input",
-    question: "Complete: She said: 'I saw him.' → She said she ____ him.",
-    answer: "had seen"
   }
 ];
 
