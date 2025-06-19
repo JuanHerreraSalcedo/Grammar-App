@@ -24,7 +24,7 @@ html, body {
 
 /* --- Caja de preguntas --- */
 .question-box {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.85);
   border-radius: 16px;
   max-width: 600px;
   padding: 30px;
@@ -55,7 +55,6 @@ html, body {
   transform: scale(1.05);
 }
 
-/* Estados correctos/incorrectos */
 .btn-option.correct {
   background-color: #22c55e;
   border-color: #16a34a;
@@ -84,6 +83,44 @@ html, body {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
 }
 
+/* --- Drag & Drop --- */
+.drag-word {
+  display: inline-block;
+  padding: 10px 14px;
+  margin: 6px;
+  background-color: #0ea5e9;
+  color: white;
+  border-radius: 10px;
+  cursor: grab;
+  font-weight: bold;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.drag-word:active {
+  cursor: grabbing;
+}
+
+.drop-zone {
+  display: inline-block;
+  min-width: 80px;
+  min-height: 40px;
+  margin: 4px;
+  padding: 8px 12px;
+  border: 2px dashed #64748b;
+  vertical-align: middle;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Cuando el drop está lleno */
+.drop-zone.filled {
+  border: 2px solid #22c55e;
+  background-color: #dcfce7;
+}
+
 /* --- Responsive para móviles --- */
 @media (max-width: 768px) {
   .question-box {
@@ -97,5 +134,16 @@ html, body {
 
   .score-image {
     max-width: 150px;
+  }
+
+  .drag-word {
+    padding: 8px 10px;
+    font-size: 1rem;
+  }
+
+  .drop-zone {
+    min-width: 60px;
+    min-height: 36px;
+    font-size: 1rem;
   }
 }
